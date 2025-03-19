@@ -40,6 +40,11 @@ class AddressBook {
         console.log(contact);
     }
 
+    countContacts() {
+        console.log(`Total Contacts: ${this.contacts.length}`);
+        return this.contacts.length;
+    }
+
     
 
     validateContact(contact) {
@@ -96,6 +101,8 @@ myBook1.editContact("Prince Sharma", {
     address: "789 New St" 
 });
 myBook1.listContacts();
+
+myBook1.countContacts(); 
 }
 catch(error){
     console.log(error.message);
