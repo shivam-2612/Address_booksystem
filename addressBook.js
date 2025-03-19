@@ -51,7 +51,17 @@ class Contact {
     }
 }
 
-const myBook = new AddressBook();
+const addressBooks = [];
+
+function createNewAddressBook() {
+    const newBook = new AddressBook();
+    addressBooks.push(newBook);
+    console.log(`New Address Book created. Total Address Books: ${addressBooks.length}`);
+    return newBook;
+}
+
+const myBook1 = createNewAddressBook();
+const myBook2 = createNewAddressBook();
 try{
 myBook.addContact(new Contact("Shivam", "Goyal", "2612", "bata chowk", "faridabad", "258796", "788298008", "shivam@gmail.com"));
 myBook.addContact(new Contact("Prince", "Sharma", "7895", "GK", "delhi", "110043", "9149293577", "sharmajigmail.com"));
