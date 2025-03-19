@@ -1,6 +1,7 @@
 class AddressBook {
     constructor() {
         this.contacts = [];
+        
     }
 
     addContact(contact) {
@@ -18,6 +19,21 @@ class AddressBook {
         console.log("Address Book:");
         this.contacts.forEach(c => console.log(`${c.firstName} ${c.lastName} - ${c.email}`));
     }
+    findContactByName(name) {
+        return this.contacts.find(c => 
+            `${c.firstName} ${c.lastName}`.toLowerCase() === name.toLowerCase()
+        );
+    }
+
+    editContact(name, newDetails) {
+        let contact = this.findContactByName(name);
+        if (!contact) throw new Error("Contact not found!");
+        Object.assign(contact, newDetails);
+        console.log(`Updated Contact: ${contact.firstName} ${contact.lastName}`);
+        console.log(contact);
+    }
+
+    
 
     validateContact(contact) {
         const namePattern = /^[A-Z][a-zA-Z]{2,}$/;
@@ -61,14 +77,18 @@ function createNewAddressBook() {
 }
 
 const myBook1 = createNewAddressBook();
-const myBook2 = createNewAddressBook();
 try{
-myBook.addContact(new Contact("Shivam", "Goyal", "2612", "bata chowk", "faridabad", "258796", "788298008", "shivam@gmail.com"));
-myBook.addContact(new Contact("Prince", "Sharma", "7895", "GK", "delhi", "110043", "9149293577", "sharmajigmail.com"));
+myBook1.addContact(new Contact("Shivam", "Goyal", "2612", "bata chowk", "faridabad", "258796", "7088298008", "shivam@gmail.com"));
+myBook1.addContact(new Contact("Prince", "Sharma", "7895", "Greater Kailash", "delhi", "110043", "9149293577", "sharmaji@gmail.com"));
 
-myBook.listContacts();
-myBook.removeContact("shivam@gmail.com");
-myBook.listContacts();
+myBook1.listContacts();
+myBook1.removeContact("shivam@gmail.com");
+myBook1.editContact("Prince Sharma", { 
+    phoneNumber: "1112223333", 
+    city: "chennai", 
+    address: "789 New St" 
+});
+myBook1.listContacts();
 }
 catch(error){
     console.log(error.message);
