@@ -2,25 +2,36 @@ class AddressBook {
     constructor() {
         this.contacts = [];
         
-    }
-
-    addContact(contact) {
+    }    
+        addContact(contact) {
         if (!this.validateContact(contact)) throw new Error("Invalid contact details!");
+
+        // Check for duplicate contact using `.some()`
+        const isDuplicate = this.contacts.some(c => 
+            c.firstName.toLowerCase() === contact.firstName.toLowerCase() &&
+            c.lastName.toLowerCase() === contact.lastName.toLowerCase()
+        );
+
+        if (isDuplicate) throw new Error("Duplicate entry! Contact already exists.");
+
         this.contacts.push(contact);
         console.log(`Added: ${contact.firstName} ${contact.lastName}`);
     }
 
-    removeContact(email) {
-        this.contacts = this.contacts.filter(c => c.email !== email);
-        console.log(`Removed contact with email: ${email}`);
-    }
-
     removeContactByName(name) {
-        const contact = this.findContactByName(name);
-        if (!contact) throw new Error("Contact not found!");
-        this.contacts = this.contacts.filter(c => `${c.firstName} ${c.lastName}`.toLowerCase() !== name.toLowerCase());
+        const originalSize = this.contacts.length;
+
+        // Use `.filter()` to remove contacts with matching names
+        this.contacts = this.contacts.filter(c => 
+            `${c.firstName} ${c.lastName}`.toLowerCase() !== name.toLowerCase()
+        );
+
+        if (originalSize === this.contacts.length) {
+            throw new Error("Contact not found!");
+        }
         console.log(`Removed contact: ${name}`);
     }
+
 
     listContacts() {
         console.log("Address Book:");
@@ -92,15 +103,10 @@ const myBook1 = createNewAddressBook();
 try{
 myBook1.addContact(new Contact("Shivam", "Goyal", "2612", "bata chowk", "faridabad", "258796", "7088298008", "shivam@gmail.com"));
 myBook1.addContact(new Contact("Prince", "Sharma", "7895", "Greater Kailash", "delhi", "110043", "9149293577", "sharmaji@gmail.com"));
+myBook1.addContact(new Contact("Shivam", "Goyal", "4005", "Noida", "UP", "110055", "9876543210", "shivamgoyal@example.com"));
 
 myBook1.listContacts();
-myBook1.removeContactByName("Shivam Goyal");
-myBook1.editContact("Prince Sharma", { 
-    phoneNumber: "1112223333", 
-    city: "chennai", 
-    address: "789 New St" 
-});
-myBook1.listContacts();
+
 
 myBook1.countContacts(); 
 }
