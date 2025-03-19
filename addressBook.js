@@ -18,6 +18,13 @@ class AddressBook {
         console.log(`Added: ${contact.firstName} ${contact.lastName}`);
     }
 
+    
+    sortContacts() {
+        this.contacts.sort((a, b) => (a.firstName + a.lastName).localeCompare(b.firstName + b.lastName));
+        console.log("Sorted Address Book:");
+        this.contacts.forEach(c => console.log(c.toString()));
+    }
+
     removeContactByName(name) {
         const originalSize = this.contacts.length;
 
@@ -129,6 +136,10 @@ class Contact {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+
+    toString() {
+        return `${this.firstName} ${this.lastName}, ${this.address}, ${this.city}, ${this.state}, ${this.zip}, ${this.phoneNumber}, ${this.email}`;
+    }
 }
 
 const addressBooks = [];
@@ -148,6 +159,7 @@ myBook1.addContact(new Contact("Prince", "Sharma", "7895", "Greater Kailash", "d
 
     console.log("People in bata chowk:", myBook1.searchByCity("bata chowk"));
     console.log("People in delhi:", myBook1.searchByState("delhi"));
+    myBook1.sortContacts();
     myBook1.viewByCity("bata chowk");
     myBook1.viewByState("delhi");
     myBook1.viewByCity("Greater Kailash");
@@ -159,6 +171,10 @@ myBook1.listContacts();
 
 
 myBook1.countContacts(); 
+
+
+ // Sorting by FirstName + LastName
+
 }
 catch(error){
     console.log(error.message);
