@@ -15,6 +15,13 @@ class AddressBook {
         console.log(`Removed contact with email: ${email}`);
     }
 
+    removeContactByName(name) {
+        const contact = this.findContactByName(name);
+        if (!contact) throw new Error("Contact not found!");
+        this.contacts = this.contacts.filter(c => `${c.firstName} ${c.lastName}`.toLowerCase() !== name.toLowerCase());
+        console.log(`Removed contact: ${name}`);
+    }
+
     listContacts() {
         console.log("Address Book:");
         this.contacts.forEach(c => console.log(`${c.firstName} ${c.lastName} - ${c.email}`));
@@ -82,7 +89,7 @@ myBook1.addContact(new Contact("Shivam", "Goyal", "2612", "bata chowk", "faridab
 myBook1.addContact(new Contact("Prince", "Sharma", "7895", "Greater Kailash", "delhi", "110043", "9149293577", "sharmaji@gmail.com"));
 
 myBook1.listContacts();
-myBook1.removeContact("shivam@gmail.com");
+myBook1.removeContactByName("Shivam Goyal");
 myBook1.editContact("Prince Sharma", { 
     phoneNumber: "1112223333", 
     city: "chennai", 
