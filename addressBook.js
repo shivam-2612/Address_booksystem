@@ -56,6 +56,26 @@ class AddressBook {
         return this.contacts.length;
     }
 
+    viewByCity(city) {
+        const foundContacts = this.contacts.filter(c => c.city.toLowerCase() === city.toLowerCase());
+        if (foundContacts.length) {
+            console.log(`People in ${city}:`);
+            foundContacts.forEach(c => console.log(`${c.firstName} ${c.lastName} - ${c.email}`));
+        } else {
+            console.log(`No contacts found in ${city}.`);
+        }
+    }
+
+    viewByState(state) {
+        const foundContacts = this.contacts.filter(c => c.state.toLowerCase() === state.toLowerCase());
+        if (foundContacts.length) {
+            console.log(`People in ${state}:`);
+            foundContacts.forEach(c => console.log(`${c.firstName} ${c.lastName} - ${c.email}`));
+        } else {
+            console.log(`No contacts found in ${state}.`);
+        }
+    }
+
     searchByCity(city) {
         const foundContacts = this.contacts.filter(c => c.city.toLowerCase() === city.toLowerCase());
         return foundContacts.length ? foundContacts.map(c => `${c.firstName} ${c.lastName}`) : "No contacts found in this city.";
@@ -118,6 +138,9 @@ myBook1.addContact(new Contact("Prince", "Sharma", "7895", "Greater Kailash", "d
 
     console.log("People in bata chowk:", myBook1.searchByCity("bata chowk"));
     console.log("People in delhi:", myBook1.searchByState("delhi"));
+    myBook1.viewByCity("bata chowk");
+    myBook1.viewByState("delhi");
+    myBook1.viewByCity("Greater Kailash");
 myBook1.listContacts();
 
 
