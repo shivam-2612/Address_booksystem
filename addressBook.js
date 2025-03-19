@@ -25,6 +25,16 @@ class AddressBook {
         this.contacts.forEach(c => console.log(c.toString()));
     }
 
+    sortByField(field) {
+        if (!["city", "state", "zip"].includes(field)) {
+            throw new Error("Invalid sorting field! Use 'city', 'state', or 'zip'.");
+        }
+
+        this.contacts.sort((a, b) => a[field].localeCompare(b[field]));
+        console.log(`\nSorted by ${field.charAt(0).toUpperCase() + field.slice(1)}:`);
+        this.contacts.forEach(c => console.log(c.toString()));
+    }
+
     removeContactByName(name) {
         const originalSize = this.contacts.length;
 
@@ -160,6 +170,9 @@ myBook1.addContact(new Contact("Prince", "Sharma", "7895", "Greater Kailash", "d
     console.log("People in bata chowk:", myBook1.searchByCity("bata chowk"));
     console.log("People in delhi:", myBook1.searchByState("delhi"));
     myBook1.sortContacts();
+    myBook1.sortByField("city");  // Sort by City
+    myBook1.sortByField("state"); // Sort by State
+    myBook1.sortByField("zip");  
     myBook1.viewByCity("bata chowk");
     myBook1.viewByState("delhi");
     myBook1.viewByCity("Greater Kailash");
