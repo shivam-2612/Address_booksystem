@@ -56,6 +56,16 @@ class AddressBook {
         return this.contacts.length;
     }
 
+    countByCity(city) {
+        const count = this.contacts.filter(c => c.city.toLowerCase() === city.toLowerCase()).length;
+        console.log(`Number of people in ${city}: ${count}`);
+    }
+
+    countByState(state) {
+        const count = this.contacts.filter(c => c.state.toLowerCase() === state.toLowerCase()).length;
+        console.log(`Number of people in ${state}: ${count}`);
+    }
+
     viewByCity(city) {
         const foundContacts = this.contacts.filter(c => c.city.toLowerCase() === city.toLowerCase());
         if (foundContacts.length) {
@@ -141,6 +151,10 @@ myBook1.addContact(new Contact("Prince", "Sharma", "7895", "Greater Kailash", "d
     myBook1.viewByCity("bata chowk");
     myBook1.viewByState("delhi");
     myBook1.viewByCity("Greater Kailash");
+
+    myBook1.countByCity("bata chowk");
+    myBook1.countByCity("Greater Kailash");
+    myBook1.countByState("Delhi");
 myBook1.listContacts();
 
 
